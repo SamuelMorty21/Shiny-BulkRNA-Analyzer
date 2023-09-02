@@ -97,3 +97,68 @@ To perform Principal Component Analysis (PCA) for dimensionality reduction and v
    # Perform Principal Component Analysis (PCA)
    perform_PCA()
    ```
+EXAMPLE: https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/Shiny-BulkRNA-Analyzer/test/plots/PCA.pdf
+
+After running the command, the system will automatically generate a PCA.pdf file. You can find the PCA.pdf file inside the ```plots``` folder located in the root directory of your project.
+
+Now, you have successfully performed PCA to visualize sample differences, and the PCA plot is available in the PCA.pdf file located in the plots folder. This plot can be valuable for understanding the variation in your data.
+
+## Performing Differential Expression Analysis (DEGs)
+
+To perform Differential Expression Analysis (DEGs) with different log2fold thresholds, you can use the `perform_DEGs` function. This analysis will identify genes that are differentially expressed compared to your specified log2fold threshold.
+
+### 2-Fold DEGs
+
+To identify genes with at least a 2-fold change in expression, execute the following command:
+
+```R
+# Perform 2-Fold DEGs analysis
+perform_DEGs(log2fold = 1)
+```
+### 4-Fold DEGs
+
+To identify genes with at least a 4-fold change in expression, execute the following command:
+
+```R
+# Perform 4-Fold DEGs analysis
+perform_DEGs(log2fold = 2)
+```
+### 8-Fold DEGs
+
+To identify genes with at least an 8-fold change in expression, execute the following command:
+
+```R
+# Perform 8-Fold DEGs analysis
+perform_DEGs(log2fold = 3)
+```
+
+After running the analysis, the system will save the generated differential gene expression data in the ./results directory. The output will include the following parameters for each gene:
+
+ - __baseMean__: The average count (average expression level) representing a gene's average expression across all samples.
+   
+ - __log2FoldChange__: The logarithmic fold change in gene expression, indicating the difference in expression between two sample groups, typically expressed in log2 form.
+  
+ - __lfcSE__: The standard error of the log fold change, representing the estimate's precision for differential expression.
+   
+ - __stat__: A statistical measure used to assess the degree of expression difference for a gene, often related to hypothesis testing.
+   
+ - __pvalue__: The p-value from a hypothesis test, measuring the significance of observed differences. Smaller p-values indicate more significant differences.
+   
+ - __padj__: The adjusted p-value (usually corrected for multiple testing), accounting for the false positive rate in the context of multiple comparisons. Typically used to determine significance.
+  
+
+You can utilize this data for further downstream analysis or visualize the differentially expressed genes.
+
+## Generating a Heatmap
+
+To generate a heatmap for specific genes of interest, you can use the `gene_info()` function. This function allows you to input the genes you want to include in the heatmap.
+
+```R
+# Input genes for the heatmap
+gene_info()
+```
+If you need to input multiple genes, you can separate them with spaces. For example, if you want to include genes like "DDX6," "DND1," and "NANOG," you can enter them as follows:
+
+__"DDX6 DND1 NANOG__
+
+After executing the gene_info() function with your selected genes, you can proceed to create a heatmap based on the provided gene expression data.
