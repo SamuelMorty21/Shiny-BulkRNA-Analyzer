@@ -68,20 +68,20 @@ Within the document, you'll find instructions for installing the necessary R pac
 
 ## Generating Count Matrix and TPM Matrix
 
-1. Execute the following command to generate the count matrix and TPM matrix:
+### Execute the following command to generate the count matrix and TPM matrix:
 
    ```R
    # Generate the count matrix and TPM matrix
    perform_count_matrix_and_logtpm()
    ```
 
-   After running the command, the system will create a count_matrix folder in the root directory of your project.
+   1. After running the command, the system will create a count_matrix folder in the root directory of your project.
 
-   Inside the count_matrix folder, you will find the following files:
+      Inside the count_matrix folder, you will find the following files:
 
-   ```count_matrix.csv```: This file contains the count matrix generated from the featureCounts data. It includes information on ```gene IDs```, ```chromosomes```, ```start``` and ```end positions```, ```strand```, ```gene length```, and the ```counts``` for each sample.
+      ```count_matrix.csv```: This file contains the count matrix generated from the featureCounts data. It includes information on ```gene IDs```, ```chromosomes```, ```start``` and ```end positions```, ```strand```, ```gene length```, and the ```counts``` for each sample.
    
-   ```TPM_matrix.csv```: This file contains the TPM (Transcripts Per Million) matrix generated using the TPM algorithm. It provides normalized expression values for each gene across samples.
+      ```TPM_matrix.csv```: This file contains the TPM (Transcripts Per Million) matrix generated using the TPM algorithm. It provides normalized expression values for each gene across samples.
    
 Now, you have successfully generated the count matrix and TPM matrix necessary for your analysis. These files are located in the count_matrix folder and can be used for downstream analyses.
 
@@ -151,14 +151,79 @@ You can utilize this data for further downstream analysis or visualize the diffe
 
 ## Generating a Heatmap
 
-To generate a heatmap for specific genes of interest, you can use the `gene_info()` function. This function allows you to input the genes you want to include in the heatmap.
+1. ### To generate a heatmap for specific genes of interest, you can use the `gene_info()` function. This function allows you to input the genes you want to include in the heatmap.
+
+    ```R
+    # Input genes for the heatmap
+    gene_info()
+    ```
+    If you need to input multiple genes, you can separate them with spaces. For example, if you want to include genes like "DDX6," "DND1," and "NANOG," you can enter them as follows:
+
+    __"DDX6 DND1 NANOG"__
+
+    After executing the gene_info() function with your selected genes, you can proceed to create a heatmap based on the provided gene expression data.
+
+2. ### After inputting your selected genes using the `gene_info()` function, you can proceed to generate a heatmap. To do this, execute the `perform_Heatmap()` function:
+
+    ```R
+    # Generate a heatmap
+    Heatmap_result <- perform_Heatmap()
+    ```
+    This will create a heatmap object based on the gene expression data you provided.
+   
+   You can further customize the heatmap by selecting specific columns or features from the heatmap object. To do this, you can use the ht_getcol() function:
+
+   ```R
+   # Select specific columns or features from the heatmap object
+   ht_getcol()
+   ```
+   
+   By customizing the heatmap, you can focus on the aspects of the data that are most relevant to your analysis or visualization needs.
+
+3. ### Draw a Heatmap
+   ```R
+   heatmap_fig <- create_custom_heatmap(
+     data = Heatmap_result[[1]][, selected_cols],
+     col_data = Heatmap_result[[3]],
+     genes_info = genes_info,
+     show_column_names = FALSE,
+     # rect_gp = gpar(col = "white", lwd = 2)
+     rect_gp = gpar(col = NA)
+   )
+   pdf(paste0(file_path, "plots/Heatmap4.pdf"),width = Heatmap_result[[4]], height=Heatmap_result[[5]])
+   draw(heatmap_fig)
+   dev.off()
+   ```
+   
+   This code will generate a customized heatmap and save it as a PDF file named "Heatmap4.pdf" in the specified directory (file_path/plots/). You can adjust the customization options and file path as needed to meet your visualization requirements.
+
+
+## Generating a Dot Plot with Differential Gene Information
+
+To create a dot plot that visualizes differential gene expression information, you can use the `perform_dotplot()` function. This function allows you to incorporate the data related to differentially expressed genes into your dot plot.
+
+Here's an example of how to use `perform_dotplot()` to visualize differential gene expression:
 
 ```R
-# Input genes for the heatmap
-gene_info()
+# Generate a dot plot with differential gene information
+dotplot_result <- perform_dotplot()
 ```
-If you need to input multiple genes, you can separate them with spaces. For example, if you want to include genes like "DDX6," "DND1," and "NANOG," you can enter them as follows:
 
-__"DDX6 DND1 NANOG__
+## Performing Gene Ontology (GO) Term Analysis
 
-After executing the gene_info() function with your selected genes, you can proceed to create a heatmap based on the provided gene expression data.
+To perform Gene Ontology (GO) term analysis with different log2fold thresholds, you can use the `perform_GOs()` function. This analysis helps you identify enriched GO terms associated with differentially expressed genes.
+
+### GO Term Analysis with 2-Fold DEGs
+
+To identify enriched GO terms for genes with at least a 2-fold change in expression, execute the following command:
+
+```R
+# Perform GO term analysis for 2-Fold DEGs
+perform_GOs(log2fold = 1, mode = 2)
+```
+After running each analysis, the system will provide information on enriched GO terms associated with differentially expressed genes.
+
+## Summary
+The BulkRNA Analysis Toolkit provides a powerful and user-friendly toolset for handling bulk RNA sequencing data. It offers features such as count matrix generation, PCA dimensionality reduction, differential gene analysis, heatmap visualization, and GO term analysis, enabling researchers to gain deep insights into gene expression data. You can customize workflows as needed and leverage interactive tools and visualizations for valuable insights. If you encounter any issues, refer to the documentation or seek support from the community. 
+
+Wishing you a successful analysis!
