@@ -19,7 +19,7 @@ To get started with the BulkRNA Analysis Toolkit, follow these steps:
 1. **Installation:** Clone this repository and install the required R packages.
 
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+   https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer.git
    ```
    
 2. **Install the dependencies:** Open the ```BulkRNA.Rmd``` file and load the first section to install the dependencies:
