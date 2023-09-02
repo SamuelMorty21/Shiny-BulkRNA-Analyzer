@@ -151,7 +151,7 @@ You can utilize this data for further downstream analysis or visualize the diffe
 
 ## Generating a Heatmap
 
-1. ### To generate a heatmap for specific genes of interest, you can use the `gene_info()` function. This function allows you to input the genes you want to include in the heatmap.
+1. ### Input the genes you want to include in the heatmap
 
     ```R
     # Input genes for the heatmap
@@ -163,7 +163,7 @@ You can utilize this data for further downstream analysis or visualize the diffe
 
     After executing the gene_info() function with your selected genes, you can proceed to create a heatmap based on the provided gene expression data.
 
-2. ### After inputting your selected genes using the `gene_info()` function, you can proceed to generate a heatmap. To do this, execute the `perform_Heatmap()` function:
+2. ### Generate the heatmap object and choose your samples
 
     ```R
     # Generate a heatmap
