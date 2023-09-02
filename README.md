@@ -66,13 +66,9 @@ Within the document, you'll find instructions for installing the necessary R pac
    load_sample_info()
    ```
 
-   
-    You can freely choose the root directory, then click 'Load Tag Information' to add the root directory to the environment variables.
-![GUI](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/GUI/sample_info-1.png)
-
-    You can rename the samples by refilling the sample information
-
 ![GUI](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/GUI/sample_info-2.png)
+
+You can freely choose the root directory, then click 'Load Tag Information' to add the root directory to the environment variables and rename the samples by refilling the sample information.
 
 ## Generating Count Matrix and TPM Matrix
 
