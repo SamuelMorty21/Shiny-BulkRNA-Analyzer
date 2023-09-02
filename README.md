@@ -1,8 +1,8 @@
-# BulkRNA Analysis Toolkit for Shiny
+# Shiny BulkRNA Analysis as a Toolkit
 
-![Project Logo](link_to_logo.png) <!-- 如果有项目标志，请添加 -->
+<!-- ![Project Logo](link_to_logo.png)--> 
 
-The BulkRNA Analysis Toolkit for Shiny is a comprehensive R-based package designed to simplify and enhance the analysis of bulk RNA sequencing data. It offers a user-friendly Shiny web application with interactive tools and visualizations for researchers and bioinformaticians working with gene expression data.
+The BulkRNA Analysis Toolkit is a comprehensive R-based package designed to simplify and enhance the analysis of bulk RNA sequencing data. It offers a user-friendly Shiny web application with interactive tools and visualizations for researchers and bioinformaticians working with gene expression data.
 
 ## Features
 
@@ -66,6 +66,14 @@ Within the document, you'll find instructions for installing the necessary R pac
    load_sample_info()
    ```
 
+   
+    You can freely choose the root directory, then click 'Load Tag Information' to add the root directory to the environment variables.
+![GUI](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/GUI/sample_info-1.png)
+
+    You can rename the samples by refilling the sample information
+
+![GUI](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/GUI/sample_info-2.png)
+
 ## Generating Count Matrix and TPM Matrix
 
 ### Execute the following command to generate the count matrix and TPM matrix:
@@ -97,11 +105,9 @@ To perform Principal Component Analysis (PCA) for dimensionality reduction and v
    # Perform Principal Component Analysis (PCA)
    perform_PCA()
    ```
-EXAMPLE: https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/Shiny-BulkRNA-Analyzer/test/plots/PCA.pdf
+   
+![EXAMPLE](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/figure/PCA.png) 
 
-After running the command, the system will automatically generate a PCA.pdf file. You can find the PCA.pdf file inside the ```plots``` folder located in the root directory of your project.
-
-Now, you have successfully performed PCA to visualize sample differences, and the PCA plot is available in the PCA.pdf file located in the plots folder. This plot can be valuable for understanding the variation in your data.
 
 ## Performing Differential Expression Analysis (DEGs)
 
@@ -162,8 +168,9 @@ You can utilize this data for further downstream analysis or visualize the diffe
     __"DDX6 DND1 NANOG"__
 
     After executing the gene_info() function with your selected genes, you can proceed to create a heatmap based on the provided gene expression data.
+   
 
-2. ### Generate the heatmap object and choose your samples
+3. ### Generate the heatmap object and choose your samples
 
     ```R
     # Generate a heatmap
@@ -180,7 +187,7 @@ You can utilize this data for further downstream analysis or visualize the diffe
    
    By customizing the heatmap, you can focus on the aspects of the data that are most relevant to your analysis or visualization needs.
 
-3. ### Draw a Heatmap
+4. ### Draw a Heatmap
    ```R
    heatmap_fig <- create_custom_heatmap(
      data = Heatmap_result[[1]][, selected_cols],
@@ -197,7 +204,8 @@ You can utilize this data for further downstream analysis or visualize the diffe
    
    This code will generate a customized heatmap and save it as a PDF file named "Heatmap4.pdf" in the specified directory (file_path/plots/). You can adjust the customization options and file path as needed to meet your visualization requirements.
 
-
+   ![ht](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/figure/heatmap.png)
+   
 ## Generating a Dot Plot with Differential Gene Information
 
 To create a dot plot that visualizes differential gene expression information, you can use the `perform_dotplot()` function. This function allows you to incorporate the data related to differentially expressed genes into your dot plot.
@@ -206,8 +214,9 @@ Here's an example of how to use `perform_dotplot()` to visualize differential ge
 
 ```R
 # Generate a dot plot with differential gene information
-dotplot_result <- perform_dotplot()
+perform_dotplot()
 ```
+![dotplot](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/figure/dotplot.png)
 
 ## Performing Gene Ontology (GO) Term Analysis
 
@@ -222,6 +231,8 @@ To identify enriched GO terms for genes with at least a 2-fold change in express
 perform_GOs(log2fold = 1, mode = 2)
 ```
 After running each analysis, the system will provide information on enriched GO terms associated with differentially expressed genes.
+
+![go](https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer/blob/main/screenshots/figure/GO.png)
 
 ## Summary
 The BulkRNA Analysis Toolkit provides a powerful and user-friendly toolset for handling bulk RNA sequencing data. It offers features such as count matrix generation, PCA dimensionality reduction, differential gene analysis, heatmap visualization, and GO term analysis, enabling researchers to gain deep insights into gene expression data. You can customize workflows as needed and leverage interactive tools and visualizations for valuable insights. If you encounter any issues, refer to the documentation or seek support from the community. 
