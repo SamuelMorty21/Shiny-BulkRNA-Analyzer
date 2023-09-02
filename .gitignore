@@ -1,0 +1,25 @@
+# Generated files and directories
+count_matrix/
+TPM_matrix/
+results/
+heatmap/
+dotplot/
+GO/
+
+# Environment-specific files
+.Rprofile
+.Renviron
+
+# R package specific
+*.tar.gz
+
+# Other user-specific files
+.Ruserdata
+.RData.user
+
+# Editor/IDE-specific files
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
