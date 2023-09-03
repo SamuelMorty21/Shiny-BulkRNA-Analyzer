@@ -19,7 +19,7 @@ To get started with the BulkRNA Analysis Toolkit, follow these steps:
 1. **Installation:** Clone this repository and install the required R packages.
 
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+   https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer.git
    ```
    
 2. **Install the dependencies:** Open the ```BulkRNA.Rmd``` file and load the first section to install the dependencies:
@@ -40,8 +40,6 @@ To get started with the BulkRNA Analysis Toolkit, follow these steps:
 - cowplot
 - shiny
 
-Within the document, you'll find instructions for installing the necessary R packages and setting up any additional configuration required for the analysis. Follow these instructions to ensure that all dependencies are correctly installed.
-
 ## Preparing Raw Data and Loading Sample Information
 
 ### Organizing Raw Data
@@ -53,7 +51,7 @@ Within the document, you'll find instructions for installing the necessary R pac
    - End
    - Strand
    - Length
-   - ./Fine-2-input/Fine-2-inputAligned.sortedByCoord.out.bam
+   - Counts
 
 2. Make sure that your gene IDs use `gene_name` as the identifier and do not use Ensembl IDs or any other identifiers.
 
