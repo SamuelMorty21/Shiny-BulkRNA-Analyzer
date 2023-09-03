@@ -22,8 +22,15 @@ To get started with the BulkRNA Analysis Toolkit, follow these steps:
    https://github.com/SamuelMorty22/Shiny-BulkRNA-Analyzer.git
    ```
    
-2. **Install the dependencies:** Open the ```BulkRNA.Rmd``` file and load the first section to install the dependencies:
+2. **Install the dependencies:** Open the ```BulkRNA.Rmd``` file and execute the following codes to set the workspace and install the dependencies:
+   ```R
+   knitr::opts_knit$set(root.dir = "D:/Shiny-BulkRNA-Analyzer/Shiny-BulkRNA-Analyzer/test")
+   roots <- knitr::opts_knit$get("root.dir")
+   source(file.path(dirname(roots), "preload_dependencies.R"))
+   preload_dependencies(srcpath = roots)
+   ```
 
+   The dependencies include:
 - dplyr
 - org.Hs.eg.db
 - limma
