@@ -1,26 +1,32 @@
 library(shiny)
 
 gene_ui <- fluidPage(
-  tags$head(
-    tags$style(
-      HTML("
+  navbarPage(
+    "ShinyBulk",
+    
+    tabPanel("信息填写",
+             tags$head(
+               tags$style(
+                 HTML("
       .blue-button {
         background-color: #007bff; /* 蓝色背景颜色 */
         color: white; /* 文本颜色为白色 */
       }
     ")
+               )
+             ),
+             
+             titlePanel("基因输入界面"),
+             fluidRow(
+               column(6, textInput("gene_input", "基因名：", placeholder = "输入基因名")),
+               column(6, textInput("category_input", "基因类别：", placeholder = "输入基因类别"))
+             ),
+             actionButton("add_row", "添加基因"),
+             actionButton("remove_row", "减少最后一行"),
+             actionButton("store_data", "存储基因数据", class = "blue-button"),
+             dataTableOutput("gene_data_table")
     )
-  ),
-  
-  titlePanel("基因输入界面"),
-  fluidRow(
-    column(6, textInput("gene_input", "基因名：", placeholder = "输入基因名")),
-    column(6, textInput("category_input", "基因类别：", placeholder = "输入基因类别"))
-  ),
-  actionButton("add_row", "添加基因"),
-  actionButton("remove_row", "减少最后一行"),
-  actionButton("store_data", "存储基因数据", class = "blue-button"),
-  dataTableOutput("gene_data_table")
+  )
 )
 
 gene_server <- function(input, output, session) {
