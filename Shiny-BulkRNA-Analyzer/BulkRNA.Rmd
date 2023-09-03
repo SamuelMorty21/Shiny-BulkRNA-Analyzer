@@ -5,55 +5,21 @@ date: "2023-08-22"
 ---
 
 ```{r setup, include=FALSE, echo=F}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-source_list <- list.files("D:/R/src/", full.names = TRUE, pattern = "\\.R$")
-
-for (source in source_list) {
-    source(source)
-  }
-
-required_packages <- c("dplyr","org.Hs.eg.db","limma","ggplot2","circlize","tibble","pheatmap","gridExtra","ggrepel",
-                         "DESeq2", 'ComplexHeatmap',"ggplotify","clusterProfiler","cowplot")
-# 逐个加载包
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, dependencies = F)
-  }
-  library(pkg, character.only = TRUE)
-}
-
-if (exists("file_path")){
-  if (file.exists(paste0(file_path, "genes_info.rds"))){
-  genes_info <- readRDS(paste0(file_path, "genes_info.rds"))
-  }
-
-}
+knitr::opts_knit$set(root.dir = "D:/Shiny-BulkRNA-Analyzer/Shiny-BulkRNA-Analyzer/test")
+roots <- knitr::opts_knit$get("root.dir")
+source(file.path(dirname(roots), "preload_dependencies.R"))
+preload_dependencies(srcpath = roots)
 ```
 
 ## **Please Upload the Proper Sample Information**
 
 ```{r}
-if(!exists("file_path")){
-  
-  file_path <<- c()
-}
-
 load_sample_info() # 样本relabel切记！前面不可有空格!不支持横杠！
 
 ```
 
 ```{r}
-saveRDS(sample_info, paste0(file_path, "sample_info.rds"))
-```
-
-```{r}
-print(sample_info)
-print(file_path)
-
-```
-
-```{r}
-sample_info <- readRDS(paste0(file_path, "sample_info.rds"))
+# sample_info <- readRDS(paste0(file_path, "sample_info.rds"))
 
 # sample_info$Select <- c("Yes","Yes","No","No","Yes","Yes")
 # group_info <- sample_info[sample_info$Select=="Yes",]
@@ -87,12 +53,12 @@ genes_info()
 ```
 
 ```{r}
-genes_info <- readRDS(paste0(file_path, "genes_info.rds"))
+# genes_info <- readRDS(paste0(file_path, "genes_info.rds"))
 ```
 
 ```{r}
 Heatmap_result <- perform_Heatmap()
-ht_getcol()
+ht_getcol() # select the samples you want to display
 ```
 
 ```{r}
@@ -100,11 +66,11 @@ heatmap_fig <- create_custom_heatmap(
   data = Heatmap_result[[1]][, selected_cols],
   col_data = Heatmap_result[[3]],
   genes_info = genes_info,
-  show_column_names = FALSE,
-  # rect_gp = gpar(col = "white", lwd = 2)
-  rect_gp = gpar(col = NA)
+  show_column_names = TRUE,
+  rect_gp = gpar(col = "white", lwd = 2)
+  # rect_gp = gpar(col = NA)
 )
-pdf(paste0(file_path, "plots/Heatmap4.pdf"),width = Heatmap_result[[4]], height=Heatmap_result[[5]])
+pdf(paste0(file_path, "plots/Heatmap.pdf"),width = Heatmap_result[[4]], height=Heatmap_result[[5]])
 draw(heatmap_fig)
 dev.off()
 
@@ -122,6 +88,6 @@ perform_GOs(
 ```
 
 ```{r}
-# save.image("D:/R/qizhe1/KO_WT_OLD.RData")
-save.image("D:/R/qizhe1/KO_WT.RData")
+
+save.image(file.path(roots, "main.RData"))
 ```

@@ -1,4 +1,10 @@
 perform_GOs <- function(log2fold, mode = 2){
+  
+  if (substr(file_path, nchar(file_path), nchar(file_path)) != "/") {
+    # 如果最后一个字符不是斜杠，添加斜杠
+    file_path <- paste0(file_path, "/")
+  }
+  
   group_info <- sample_info[sample_info$Select=="Yes",]
   fold = 2^log2fold
   path = paste0(file_path, "results/DEG/",

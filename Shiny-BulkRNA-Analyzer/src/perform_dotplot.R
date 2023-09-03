@@ -46,11 +46,11 @@ perform <- function(tpm_matrix, file_DEG, log2folds){
 
 
 perform_dotplot <- function(){
-  matrix <- read.csv(paste0(file_path, "count_matrix/logtpm_matrix.csv"), row.names = 1, check.names = F)
+  matrix <- read.csv(file.path(file_path, "count_matrix/logtpm_matrix.csv"), row.names = 1, check.names = F)
   
   filename1 = paste0(unique(group_info$Group)[2],"_vs_",unique(group_info$Group)[1],"_all_DEGs",".csv")
   
-  DEG_result <- read.csv(paste0(file_path, "results/DEG/",filename1), row.names = 1, check.names = F)
+  DEG_result <- read.csv(file.path(file_path, "results/DEG/",filename1), row.names = 1, check.names = F)
   
   matrix1 <- perform(matrix, DEG_result, 1)
   matrix2 <- perform(matrix, DEG_result, 2)

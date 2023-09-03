@@ -11,17 +11,17 @@ perform_count_matrix_and_logtpm <- function(){
   
   folder_names <- c("count_matrix", "results", "plots")
   for (folder_name in folder_names) {
-    folder_path <- paste0(file_path, folder_name)  # 构建文件夹路径
+    folder_path <- file.path(file_path, folder_name)  # 构建文件夹路径
     if (!dir.exists(folder_path)) {
       dir.create(folder_path)  # 创建文件夹
     }
   }
-  files <<- list.files(path = paste0(file_path,"raw_material/"))
+  files <<- list.files(path = file.path(file_path,"raw_material/"))
   if (is.null(files)){
     stop("Can not find the material files! Please check it again!")
   }
   expr <- lapply(files, function(x){
-    tmp <- read.table(file = file.path(paste0(file_path,"raw_material/"),x), header = T, check.names = FALSE) [,c(1:7)]
+    tmp <- read.table(file = file.path(paste0(file_path,"/raw_material/"),x), header = T, check.names = FALSE) [,c(1:7)]
     return(tmp)})
   df <- do.call(cbind,expr) 
   df <- na.omit(df) 
@@ -62,10 +62,10 @@ perform_count_matrix_and_logtpm <- function(){
              cellheight = 30
     )
   )
-  ggsave(paste0(file_path,"plots/Correlationship.pdf"), plot = gg_Corela,width = width, height=height)
+  ggsave(file.path(file_path,"plots/Correlationship.pdf"), plot = gg_Corela,width = width, height=height)
   
   # 写出count matrix和tpm的matrix
-  write.csv(count,paste0(file_path,"count_matrix/count_matrix.csv"))
-  write.csv(logtpm,paste0(file_path,"count_matrix/logtpm_matrix.csv"))
-  write.csv(tpm,paste0(file_path,"count_matrix/tpm_matrix.csv"))
+  write.csv(count,file.path(file_path,"count_matrix/count_matrix.csv"))
+  write.csv(logtpm,file.path(file_path,"count_matrix/logtpm_matrix.csv"))
+  write.csv(tpm,file.path(file_path,"count_matrix/tpm_matrix.csv"))
 }

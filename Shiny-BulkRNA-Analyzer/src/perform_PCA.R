@@ -1,5 +1,5 @@
 perform_PCA <- function( mode="n"){
-  if (!file.exists(paste0(file_path,"count_matrix/count_matrix.csv"))) {
+  if (!file.exists(file.path(file_path,"count_matrix/count_matrix.csv"))) {
     stop("count matrix不存在。函数无法继续执行。")
   }
   linear <- FALSE
@@ -17,7 +17,7 @@ perform_PCA <- function( mode="n"){
       print("由于数据线性，不去除批次")
     }
     print("您使用的是不去除批次模式")
-    count <- read.csv(paste0(file_path,"count_matrix/count_matrix.csv"),header = TRUE, row.names = 1, check.names = FALSE)[,-1]
+    count <- read.csv(file.path(file_path,"count_matrix/count_matrix.csv"),header = TRUE, row.names = 1, check.names = FALSE)[,-1]
     info <- data.frame(row.names = sample_info$Sample, 
                        group = sample_info$Group,
                        sample = sample_info$Sample)
@@ -35,7 +35,7 @@ perform_PCA <- function( mode="n"){
     ##############################
   }else if (!any(sample_info$Batch=="")&&!linear){
     print("您使用的是批次模式")
-    count <- read.csv(paste0(file_path,"count_matrix/count_matrix.csv"),header = TRUE, row.names = 1, check.names = FALSE)[,-1]
+    count <- read.csv(file.path(file_path,"count_matrix/count_matrix.csv"),header = TRUE, row.names = 1, check.names = FALSE)[,-1]
     info <- data.frame(row.names = sample_info$Sample, 
                        celltype = sample_info$Group,
                        batch = sample_info$Batch, #假设有两个批次，每个批次各有三种 cell type
@@ -91,6 +91,6 @@ perform_PCA <- function( mode="n"){
     theme_bw()+
     theme(panel.grid = element_blank())+
     labs(x=paste0("PC1:",variance_explained[1]*100,"%"),y=paste0("PC2:",variance_explained[2]*100,"%"))
-  ggsave(paste0(file_path,"plots/PCA.pdf"), plot_pca, width = 8, height = 7, dpi = 300)
-  write.csv(loadings,paste0(file_path,"results/PCA_data_all.csv"))
+  ggsave(file.path(file_path,"plots/PCA.pdf"), plot_pca, width = 8, height = 7, dpi = 300)
+  write.csv(loadings,file.path(file_path,"results/PCA_data_all.csv"))
 }

@@ -1,5 +1,11 @@
 perform_DEGs <- function(log2fold = 2, padjvalue = 0.05){
-  deg.count <- read.csv(paste0(file_path,"count_matrix/count_matrix.csv"),header = TRUE, row.names = 1, check.names = FALSE)[,-1]
+  
+  if (substr(file_path, nchar(file_path), nchar(file_path)) != "/") {
+    # 如果最后一个字符不是斜杠，添加斜杠
+    file_path <- paste0(file_path, "/")
+  }
+  
+  deg.count <- read.csv(file.path(file_path,"count_matrix/count_matrix.csv"),header = TRUE, row.names = 1, check.names = FALSE)[,-1]
   
   fold = 2^log2fold
   # sample_names <<- colnames(deg.count) # samples_names传入
@@ -16,7 +22,10 @@ perform_DEGs <- function(log2fold = 2, padjvalue = 0.05){
   res1 <- results(dds1)
   resOrdered1 <- res1[order(res1$log2FoldChange),] %>% as.data.frame()
   resSig <- subset(resOrdered1, padj < padjvalue)
-  dir.create(paste0(file_path,"results/DEG/"))
+  if (!dir.exists(paste0(file_path, "results/DEG/"))) {
+    # 如果文件夹不存在，创建它
+    dir.create(paste0(file_path, "results/DEG/"))
+  }
   #
   # dir.create(paste0(file_path,"results/DEG/",unique(group_info$Group)[2],"_vs_",unique(group_info$Group)[1]))
   filename1 = paste0(unique(group_info$Group)[2],"_vs_",unique(group_info$Group)[1],"_all_DEGs",".csv")
